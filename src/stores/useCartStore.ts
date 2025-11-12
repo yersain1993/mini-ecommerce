@@ -27,49 +27,49 @@ interface CartState {
 export const useCartStore = create<CartState>()(
   persist(
     (set, get) => ({
-    items: [],
-    isPaid: false,
+      items: [],
+      isPaid: false,
 
-    add: (item) => {
-      const items = get().items;
-      const exists = items.find((i) => i.id === item.id);
+      add: (item) => {
+        const items = get().items;
+        const exists = items.find((i) => i.id === item.id);
 
-      if (exists) {
-        return set({
-          items: items.map((i) =>
-            i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
+        if (exists) {
+          return set({
+            items: items.map((i) =>
+              i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
+            ),
+          });
+        }
+
+        set({ items: [...items, { ...item, quantity: 1 }] });
+      },
+
+      remove: (id) =>
+        set({
+          items: get().items.filter((i) => i.id !== id),
+        }),
+
+      increase: (id) =>
+        set({
+          items: get().items.map((i) =>
+            i.id === id ? { ...i, quantity: i.quantity + 1 } : i
           ),
-        });
-      }
+        }),
 
-      set({ items: [...items, { ...item, quantity: 1 }] });
-    },
+      decrease: (id) =>
+        set({
+          items: get().items
+            .map((i) =>
+              i.id === id ? { ...i, quantity: i.quantity - 1 } : i
+            )
+            .filter((i) => i.quantity > 0),
+        }),
 
-    remove: (id) =>
-      set({
-        items: get().items.filter((i) => i.id !== id),
-      }),
-
-    increase: (id) =>
-      set({
-        items: get().items.map((i) =>
-          i.id === id ? { ...i, quantity: i.quantity + 1 } : i
-        ),
-      }),
-
-    decrease: (id) =>
-      set({
-        items: get().items
-          .map((i) =>
-            i.id === id ? { ...i, quantity: i.quantity - 1 } : i
-          )
-          .filter((i) => i.quantity > 0),
-      }),
-
-    clear: () => set({ items: [] }),
-    
-    purchase: () => set({isPaid: true}),
-    resetPurchase: () => set({ isPaid: false }),
+      clear: () => set({ items: [] }),
+      
+      purchase: () => set({isPaid: true}),
+      resetPurchase: () => set({ isPaid: false }),
 
 }),
 
