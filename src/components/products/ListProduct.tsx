@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import ProductCard from "../common/ProductCard";
-import LoaderSpiner from '../common/LoaderSpiner'
+import ProductCard from "./ProductCard";
+import LoaderSpiner from '../ui/LoaderSpiner'
 import { productsServices } from "../../services/productsServices";
 
 
@@ -17,16 +17,14 @@ export default function ListProduct() {
     loadData()
   }, []);
 
-  const productsDataSliced = productsData.slice(0,50);
+  const productsDataSliced = productsData.slice(0,46);
 
-  console.log(productsData.length);
+  const isProduct = productsData.length === 0;
+
   return (
     <div className='text-sky-300'>
-        <h1 className='text-center text-2xl'>
-          BIENVENIDO USUARIO, ACONTINUACIÓN PODRAS VER TODO LO QUE TENEMOS PAERA OFRECERTE
-        </h1>
-        <ul className={`flex flex-wrap gap-4 ${!productsData.length ? 'h-screen' : ''} items-center justify-center mt-4`}>
-          {!productsData.length ? (
+        <ul className={`flex flex-wrap gap-2 ${isProduct ? 'h-screen' : ''} items-center justify-center mt-4`}>
+          {isProduct  ? (
             <LoaderSpiner/>
           ) : 
           (

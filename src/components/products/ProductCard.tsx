@@ -8,7 +8,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   product,
 }) => {
 
-  const { add, remove, clear } = useCartStore();
+  const add = useCartStore((state) => state.add);
 
   const handleAddToCart = () => {
     add(product);

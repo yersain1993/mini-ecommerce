@@ -1,4 +1,4 @@
-import ListProduct from "./ListProduct";
+import ListProduct from "../products/ListProduct";
 
 
 export default function Main() {
