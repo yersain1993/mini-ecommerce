@@ -1,73 +1,69 @@
-# React + TypeScript + Vite
+# Mini-Ecommerce App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este es un prueba técnica de una aplicación de e-commerce minimalista construida con React, TypeScript, Vite y Zustand. La aplicación permite a los usuarios ver, agregar y eliminar productos al carrito.
 
-Currently, two official plugins are available:
+## Instalación
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clona este repositorio en tu máquina local.
+2. Navega al directorio del proyecto en tu terminal.
+3. Ejecuta ```npm install``` para instalar las dependencias del proyecto.
+4. Ejecuta ```npm run dev``` para iniciar el servidor de desarrollo.
+5. Descripción técnica.
+   
+## La aplicación utiliza las siguientes tecnologías:
 
-## React Compiler
+- React: Librería de JavaScript para construir interfaces de usuario.
+- TypeScript: Lenguaje de programación de tipo estático para JavaScript.
+- Vite: Build tool para construir aplicaciones web rápidas y eficientes.
+- Zustand: Librería de estado de React para gestionar el estado de la aplicación.
+  
+La aplicación utiliza Vite como herramienta de construcción para compilar y servir la aplicación. React y TypeScript se utilizan para construir la interfaz de usuario y el código de la aplicación, respectivamente. Zustand se utiliza para gestionar el estado de la aplicación.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Para instalar las dependencias necesarias, se utiliza ```npm```. El servidor de desarrollo se inicia con el comando ```npm run dev```. La aplicación se puede construir con el comando ```npm run build``` para generar un paquete de producción.
 
-## Expanding the ESLint configuration
+Estructura del proyecto
+El proyecto tiene la siguiente estructura:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```
+api/
+├── axiosInstance.ts
+src/
+├── components/
+│   ├── common/
+│   │   ├── Layout/
+│   ├── Layout/   
+│   │   ├── Header.tsx
+│   │   └── Footer.tsx   
+│   │   └── Main.tsx   
+│   ├── products/
+│   │   ├── ListProduct.tsx
+│   │   ├── ProductCard.tsx
+│   │   └── ProductCart.tsx
+│   └── ui/
+│       ├── LoaderSpiner.tsx
+│       └── Modal.tsx
+├── api/
+│   ├── axiosInstance.ts
+│   └── productsServices.ts
+├── services/
+│   └── productsServices.ts
+└── stores/
+    └── useCartStore.ts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+En este ejemplo, la estructura del proyecto es la siguiente:
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+- El directorio ```src``` contiene los componentes de la interfaz de usuario, servicios y almacenamiento de estado.
+- El directorio ```components``` contiene los componentes de la interfaz de usuario, divididos en subdirectorios por funcionalidad. Algunos de los componentes principales incluyen:
+    - ```Layout```: Este componente es el contenedor principal de la interfaz de usuario y contiene los componentes ```Header```, ```Footer``` y ```Main```.
+    - ```Header```: Este componente contiene el carrito de compras.
+    - ```Footer```: Este componente contiene la sección inferior de la página, que incluye información de contacto y enlaces a las redes sociales.
+    - ```Main```: Este componente contiene el contenido principal de la página, como la lista de productos.
+    - ```ListProduct```: Este componente muestra una lista de productos y permite a los usuarios agregar productos al carrito.
+    - ```ProductCard```: Este componente muestra los detalles de un producto individual y permite a los usuarios agregar productos al carrito.
+    - ```ProductCart```: Este componente muestra el carrito de compras y permite a los usuarios adicionar mas cantidad, eliminar producto, visualizar csubtotal y total de la compra, pagar la compra y realizar una nueva compra.
+- El directorio ```api``` contiene los servicios de API, como axiosInstance.ts.
+- El directorio ```services``` contiene los servicios de la aplicación, como productsServices.ts.
+- El directorio ```stores``` contiene el almacenamiento de estado de la aplicación, como useCartStore.ts.
 
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+En resumen, la aplicación Mini-Ecommerce es una aplicación web de e-commerce minimalista construida con React, TypeScript, Vite y Zustand. La aplicación utiliza componentes de interfaz de usuario, servicios de API y almacenamiento de estado para permitir a los usuarios ver y agregar productos al carrito.
